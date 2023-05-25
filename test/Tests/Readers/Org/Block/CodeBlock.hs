@@ -27,7 +27,7 @@ tests =
                  , "  #+end_src" ] =?>
        let attr' = ("", ["haskell"], [])
            code' = "main = putStrLn greeting\n" <>
-                   "  where greeting = \"moin\"\n"
+                   "  where greeting = \"moin\""
        in codeBlockWith attr' code'
 
   , "Source block with indented code" =:
@@ -37,7 +37,7 @@ tests =
                  , "  #+end_src" ] =?>
        let attr' = ("", ["haskell"], [])
            code' = "main = putStrLn greeting\n" <>
-                   "  where greeting = \"moin\"\n"
+                   "  where greeting = \"moin\""
        in codeBlockWith attr' code'
 
   , "Source block with tab-indented code" =:
@@ -47,7 +47,7 @@ tests =
                  , "\t#+end_src" ] =?>
        let attr' = ("", ["haskell"], [])
            code' = "main = putStrLn greeting\n" <>
-                   "  where greeting = \"moin\"\n"
+                   "  where greeting = \"moin\""
        in codeBlockWith attr' code'
 
   , "Empty source block" =:
@@ -65,7 +65,7 @@ tests =
                  , "  #+end_src" ] =?>
        let attr' = ("", ["haskell"], [])
            code' = "main = putStrLn greeting\n" <>
-                    "  where greeting = \"Moin!\"\n"
+                    "  where greeting = \"Moin!\""
        in mconcat [ para $ spcSep [ "Low", "German", "greeting"  ]
                   , codeBlockWith attr' code'
                   ]
@@ -96,7 +96,7 @@ tests =
                     ]
            code' = T.unlines [ "(progn (message \"Hello, World!\")"
                              , "       (+ 23 42))" ]
-           results' = "65\n"
+           results' = "65"
        in codeBlockWith ("", classes, params) code'
           <>
           codeBlockWith ("", ["example"], []) results'
@@ -125,7 +125,7 @@ tests =
                  , ""
                  , "#+RESULTS:"
                  , ": 65" ] =?>
-       let results' = "65\n"
+       let results' = "65"
        in codeBlockWith ("", ["example"], []) results'
 
   , "Source block with results and :exports none" =:
@@ -145,7 +145,7 @@ tests =
               ] =?>
     let classes = [ "bash" ]
         params = [ ("org-language", "sh"), ("noeval", "yes") ]
-    in codeBlockWith ("", classes, params) "echo $HOME\n"
+    in codeBlockWith ("", classes, params) "echo $HOME"
 
   , "Source block with line number switch" =:
     T.unlines [ "#+begin_src sh -n 10"
@@ -154,7 +154,7 @@ tests =
               ] =?>
     let classes = [ "bash", "numberLines" ]
         params = [ ("org-language", "sh"), ("startFrom", "10") ]
-    in codeBlockWith ("", classes, params) ":() { :|:& };:\n"
+    in codeBlockWith ("", classes, params) ":() { :|:& };:"
 
   , "Source block with multi-word parameter values" =:
     T.unlines [ "#+begin_src dot :cmdline -Kdot -Tpng "
@@ -163,7 +163,7 @@ tests =
               ] =?>
     let classes = [ "dot" ]
         params = [ ("cmdline", "-Kdot -Tpng") ]
-    in codeBlockWith ("", classes, params) "digraph { id [label=\"ID\"] }\n"
+    in codeBlockWith ("", classes, params) "digraph { id [label=\"ID\"] }"
 
   , "Example block" =:
        T.unlines [ "#+begin_example"
@@ -172,7 +172,7 @@ tests =
                  , "#+eND_exAMPle"
                  ] =?>
        codeBlockWith ("", ["example"], [])
-                     "A chosen representation of\na rule.\n"
+                     "A chosen representation of\na rule."
 
   , "Code block with caption" =:
       T.unlines [ "#+caption: Functor laws in Haskell"
@@ -201,7 +201,7 @@ tests =
                     , ("tangle", "xxxx.c")
                     , ("city", "Zürich")
                     ]
-      in codeBlockWith ( "", ["c"], params) "code body\n"
+      in codeBlockWith ( "", ["c"], params) "code body"
 
   , "Header args with quotes" =:
      T.unlines [ "#+begin_src haskell :exports \"both\" :tangle \"main.hs\""
@@ -213,7 +213,7 @@ tests =
                    , ("tangle", "main.hs")
                    ]
      in codeBlockWith ("", ["haskell"], params)
-        "main :: IO ()\nmain = putStrLn \"Hello, World!\"\n"
+        "main :: IO ()\nmain = putStrLn \"Hello, World!\""
 
   , "Header args with colon" =:
      T.unlines [ "#+begin_src haskell :exports \"both\" :session \"my :session\""
@@ -225,5 +225,5 @@ tests =
                    , ("session", "my :session")
                    ]
      in codeBlockWith ("", ["haskell"], params)
-        "main :: IO ()\nmain = putStrLn \"Hello, World!\"\n"
+        "main :: IO ()\nmain = putStrLn \"Hello, World!\""
   ]
