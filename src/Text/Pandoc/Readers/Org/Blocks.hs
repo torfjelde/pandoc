@@ -230,7 +230,7 @@ rawBlockContent blockType = try $ do
   tabLen <- getOption readerTabStop
   trimP <- orgStateTrimLeadBlkIndent <$> getState
   let stripIndent strs = if trimP then map (T.drop (shortestIndent strs)) strs else strs
-  (T.unlines
+  (T.intercalate "\n"
    . stripIndent
    . map (tabsToSpaces tabLen . commaEscaped)
    $ blkLines)
